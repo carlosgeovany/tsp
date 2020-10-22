@@ -49,6 +49,10 @@ class Tour:
     def __str__(self):
         return '->'.join(self.path)
 
+    def append(self, place):
+        pass
+
+    
 class Solver:
 
     def __init__(self, algorithms):
