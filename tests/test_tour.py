@@ -1,5 +1,6 @@
 import pytest
 
+
 from tsp import Tour, Place
 
 def test_tour_closed():
