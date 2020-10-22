@@ -49,6 +49,19 @@ class Tour:
     def __str__(self):
         return '->'.join(self.path)
 
+    def append(self, place):
+        self.path.append(place)
+
+    def close(self):
+        if len(self.path) > 1:
+            self.path.append(self.path[0])
+
+    def is_closed(self):
+        is_closed = False
+        if len(self.path) > 1:
+            is_closed = self.path[0] == self.path[-1]    
+        return is_closed
+        
 class Solver:
 
     def __init__(self, algorithms):
