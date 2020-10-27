@@ -4,9 +4,33 @@
 #         - pip install pylint --quiet
 #         - pylint --ignored-classes=_socketobject *.py
 
+images: python:3.7
 
-test:pytest:
-  image: python:3.7
+before_script:
+  - pip install .
+
+stages:
+  - static analysis
+  - test
+
+flake8:
+  stage: static analysis
+  allow_failure: true
+  script:
+    - pip install flake8
+    - flake8 tsp/*.py
+
+
+pylint:
+  stage: static analysis
+  allow_failure: true
+  script:
+    - pip install pylint
+    - pylint tsp/*.py
+
+
+pytest:
+  stage: test
   script:
     - pip install .
     - pip install pytest --quiet
