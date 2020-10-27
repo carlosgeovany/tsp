@@ -1,33 +1,32 @@
 """
 """
-
 import numpy as np
 from scipy.spatial import distance
 from dataclasses import dataclass
 from typing import List
-
+from more_itertools import pairwise
 
 class TSP:
     """
     Describes a TSP
     """
     def __init__(self, coordinates):
-        self.places = [Place(v[0], v[1]) for v in coordinates]
-
+        self.places = [Place(id, v[0], v[1]) for id, v in enumerate(coordinates)]
         self.distances = distance.cdist(coordinates, coordinates, 'euclidean')
 
-        self.initial_pheromone =  1.0 / len(self.places)
-
-        self.pheromones = np.full([len(self.places), len(self.places)], fill_value=self.initial_pheromone)
-
-
+    def cost(self, place, another_place):
+        return self.distances[place.id][another_place.id]
 
     def total_cost(self, tour):
-        pass
+        total_cost = 0.0
+        for current, next in tour:
+            total_cost += self.cost(current, next)
+
+        return total_cost
 
     @staticmethod
-    def from_file(filepath):
-        coordinates = np.fromfile(filepath, sep=" ")
+    def from_file(fileobj):
+        coordinates = np.loadtxt(fileobj)
         return TSP(coordinates)
 
     @staticmethod
@@ -35,42 +34,59 @@ class TSP:
         coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
         return TSP(coordinates)
 
-@dataclass
+@dataclass(eq=True,frozen=True)
 class Place:
     """A place to be visited"""
+    id: int
     x: float
     y: float
 
 class Tour:
-    """"""
+    """
+    """
     def __init__(self):
-        self.path = []
+        self._path = []
 
-    def __str__(self):
-        return '->'.join(self.path)
+    @property
+    def initial(self):
+        return self._path[0]
 
-    def append(self, place):
-        self.path.append(place)
+    @property
+    def current(self):
+        return self._path[-1]
+
+    @property
+    def closed(self):
+        closed = False
+        if len(self._path) > 1:
+            closed = self._path[0] == self._path[-1]
+
+        return closed
 
     def close(self):
-        if len(self.path) > 1:
-            self.path.append(self.path[0])
+        if len(self._path) > 1:
+            self._path.append(self._path[0])
 
-    def is_closed(self):
-        is_closed = False
-        if len(self.path) > 1:
-            is_closed = self.path[0] == self.path[-1]    
-        return is_closed
-        
-class Solver:
+    def missing(self, places):
+        return set(places) -  set(self._path)
 
-    def __init__(self, algorithms):
-        self.algorithms = algorithms
+    def append(self, place):
+        self._path.append(place)
+
+    def __len__(self):
+        return len(self._path)
 
 
-    def solve(self, tsp):
-        for algorithm in self.algorithms:
-            algorithm.run(tsp)
+    def __iter__(self):
+        return ((current, next) for (current,next) in pairwise(self._path))
+
+
+    def __repr__(self):
+        return f"Tour: [{'->'.join([str(place) for place in self._path])}]"
+
+
+    def __str__(self):
+        return f"Tour: [{'->'.join([place.id for place in self._path])}]"
 
 __version__ = '0.1.0'
 

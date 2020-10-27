@@ -3,8 +3,8 @@ import click
 
 from dynaconf import settings
 
-# from .turista import (
-#     SimuladorTurista,
+# from tsp import (
+# Solver
 # )
 
 @click.command()
