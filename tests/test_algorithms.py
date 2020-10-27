@@ -30,8 +30,6 @@ def test_greedy(tsp_obj):
     assert int(solution['cost']) == 137
 
 def test_aoc(tsp_obj):
-    print(tsp_obj.distances)
-
     colony = AntColony(alpha=1, beta=1, rho=0.5, Q=100)
 
     solution = colony.run(tsp_obj)
