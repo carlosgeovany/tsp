@@ -1,8 +1,5 @@
 from tsp import TSP
 
-from algorithms import Algorithm
-
-
 class Solver:
     def __init__(self, algorithms):
         self.algorithms = algorithms
