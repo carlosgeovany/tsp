@@ -1,10 +1,18 @@
-from tsp import TSP
+"""
+"""
+
 
 class Solver:
+    """"""
+
     def __init__(self, algorithms):
         self.algorithms = algorithms
-
+        self.solutions = {}
 
     def solve(self, tsp):
+        print(f"Usaremos {len(self.algorithms)} algoritmos para resolver este problema.")
         for algorithm in self.algorithms:
-            algorithm.run(tsp)
+            print(f"Solving TSP problem with {algorithm}")
+            self.solutions[str(algorithm)] = algorithm.run(tsp)
+
+        return self.solutions

@@ -1,7 +1,3 @@
-# Keys
-title = "Archivo de configuración"
-
-# Tables
 [project]
 name = "TSP"
 description = ""
@@ -9,33 +5,13 @@ version = "0.1"
 updated = 2020-10-13
 author = "Adolfo De Unánue"
 
-[database]
-host = "127.0.0.1"
-password = "some_password"
-port = 5444
-name = "my_database"
-connection_max = 5000
-enabled = true
+[[algorithms]]
+algorithm="tsp.algorithms.GreedyTSP"
 
-# Nested `tables`
-[environments]
-  [environments.dev]
-    ip = "10.0.0.1"
-    dc = "eqdc10"
-  [environments.staging]
-    ip = "10.0.0.2"
-    dc = "eqdc10"
-  [environments.production]
-    ip = "10.0.0.3"
-    dc = "eqdc10"
-
-# Array of Tables
-[[testers]]
-id = 1
-username = "JohnCena"
-password = "YouCantSeeMe69"
-
-[[testers]]
-id = 3
-username = "TheRock"
-password = "CantCook123"
+# [[algorithms]]
+# algorithm="tsp.algorithms.AntColony"
+# [algorithms.hyperparameters]
+# alpha = [0.5, 1.0]
+# beta = [1.0, 2.0, 5.0]
+# rho = [0.5, 0.8]
+# Q = [10,100]

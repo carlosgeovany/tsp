@@ -21,9 +21,13 @@ def test_append_place(places):
 
     assert places['A'] == t1.initial
 
+    assert t1.visited_places == set([places['A']])
+
     t1.append(places['B'])
 
     assert len(t1) == 2
+
+    assert t1.visited_places == set([places['A'], places['B']])
 
 
 def test_close_tour(places):

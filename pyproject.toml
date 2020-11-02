@@ -23,22 +23,6 @@ force_grid_wrap = 0
 combine_as_imports = true
 include_trailing_comma = true
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-isolated_build = true
-envlist = py37
-"""
-
-[tool.towncrier]
-# Usage: (Source: https://github.com/python-trio/trio/blob/master/pyproject.toml)
-# - PRs should drop a file like "issuenumber.feature" in newsfragments
-#   (or "bugfix", "doc", "removal", "misc")
-# - At release time after bumping version number, run:
-#   poetry run towncrier --draft, then poetry towncrier
-package = "tsp"
-filename = "doc/changelog.rst"
-directory = "newsfragments"
 
 [build-system]
 requires = ["setuptools >= 40.6.0", "wheel"]
