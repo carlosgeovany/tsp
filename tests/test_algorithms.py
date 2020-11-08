@@ -11,7 +11,7 @@ def test_greedy(tsp_obj):
 
     solution = g.run(tsp_obj)
 
-    assert int(solution['cost']) == 21
+    assert int(solution['cost']) == 8
 
 
 def test_aoc(tsp_obj):

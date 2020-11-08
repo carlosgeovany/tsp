@@ -59,7 +59,7 @@ class Ant:
         self.colony = colony
 
     def smell(self, other):
-        return self.colony.pheromones[self.current][other]**self.colony.alpha * self.colony.eta[self.current][other]**self.colony.beta
+        return self.colony.pheromones[self.current.id][other.id]**self.colony.alpha * (1.0 / self.colony.eta[self.current.id][other.id])**self.colony.beta
 
     @property
     def not_visited(self):
@@ -101,7 +101,7 @@ class AntColony(Algorithm):
         self.beta = hyperparams.get('beta', 1)
         self.rho = hyperparams.get('rho', 0.5)
         self.Q = hyperparams.get('Q', 100)
-        self.best = None
+        self.best = Tour()
         self.steps = 0
         self.max_steps = hyperparams.get('max_steps', 100)
 
@@ -129,8 +129,8 @@ class AntColony(Algorithm):
 
         for ant in self.ants:
             for (current, next) in ant.tour:
-                self.pheromones[current][next] += self.Q/len(ant.tour)
-                self.pheromones[next][current] = self.pheromones[current][to]
+                self.pheromones[current.id][next.id] += self.Q/len(ant.tour)
+                self.pheromones[next.id][current.id] = self.pheromones[current.id][next.id]
 
         self.pheromones *= self.rho
 
@@ -142,7 +142,6 @@ class AntColony(Algorithm):
     def step(self):
         for ant in self.ants:
             ant.move()
-
         self.update_best()
         self.update_pheromones()
         self.steps += 1
@@ -152,6 +151,8 @@ class AntColony(Algorithm):
         self.init()
         while not self.done:
             self.step()
+            
+        return {'cost': self.steps, 'best': self.best}
 
     def __str__(self):
         return f"{self.__class__} [alpha: {self.alpha}, beta: {self.beta}, rho: {self.rho}, Q: {self.Q}, max_steps: {self.max_steps}]"
