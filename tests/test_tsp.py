@@ -10,11 +10,11 @@ def test_tour_cost(tsp_obj, tour_obj):
 
 
 def test_tsp_creation(tsp_obj):
-    assert Place(0, 0, 0) == tsp_obj.places[0] and \
-        Place(1, 1, 0) == tsp_obj.places[1] and \
-        Place(2, 0, 1) == tsp_obj.places[2] and \
-        Place(3, 1, 1) == tsp_obj.places[3] and \
-        Place(4, 2, 3) == tsp_obj.places[4]
+    assert (Place(0, 0, 0) == tsp_obj.places[0] and 
+            Place(1, 1, 0) == tsp_obj.places[1] and 
+            Place(2, 0, 1) == tsp_obj.places[2] and 
+            Place(3, 1, 1) == tsp_obj.places[3] and 
+            Place(4, 2, 3) == tsp_obj.places[4])
 
 def test_missing_places(tsp_obj, tour_obj, t1):
     assert set() == tsp_obj.missing(tour_obj.visited_places)

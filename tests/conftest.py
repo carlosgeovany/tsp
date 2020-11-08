@@ -3,6 +3,7 @@ import io
 import pytest
 
 from tsp import TSP, Place, Tour
+from tsp.algorithms import AntColony
 
 
 @pytest.fixture
@@ -69,3 +70,8 @@ def t1():
     t1.append(Place(1, 1, 0))
     t1.append(Place(2, 0, 1))
     return t1
+
+@pytest.fixture
+def colony():
+    colony = AntColony
+    return colony
