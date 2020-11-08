@@ -10,7 +10,7 @@ def process_grid(grids):
         if 'hyperparameters' in grid:
             hp_grid = grid['hyperparameters']
             for hyperparameters in flatten_algorithm_grid(hp_grid):
-                algorithms.append(load_algorithm(classpath, hyperparameters))
+                algorithms.append(load_algorithm(classpath, **hyperparameters))
         else:
             algorithms.append(load_algorithm(classpath))
 
@@ -26,7 +26,6 @@ def load_algorithm(classpath, **hyperparameters):
 
 
 def flatten_algorithm_grid(algorithm_grid):
-    #    for hp in algorithm_grid:
     items = sorted(algorithm_grid.items())
     if not items:
         yield {}
