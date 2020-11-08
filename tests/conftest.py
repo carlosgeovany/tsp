@@ -4,7 +4,7 @@ import pytest
 
 from tsp import TSP, Place, Tour
 from tsp.algorithms import AntColony
-
+from config import settings
 
 @pytest.fixture
 def coordinates_file():
@@ -75,3 +75,8 @@ def t1():
 def colony():
     colony = AntColony
     return colony
+
+@pytest.fixture
+def grids():
+    grids = settings.algorithms
+    return grids
