@@ -10,7 +10,7 @@ class Solver:
         self.solutions = {}
 
     def solve(self, tsp):
-        print(f"Usaremos {len(self.algorithms)} algoritmos para resolver este problema.")
+        print(f"Will use {len(self.algorithms)} algorithms to solve this problem.")
         for algorithm in self.algorithms:
             print(f"Solving TSP problem with {algorithm}")
             self.solutions[str(algorithm)] = algorithm.run(tsp)
