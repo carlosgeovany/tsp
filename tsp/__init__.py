@@ -32,10 +32,10 @@ class TSP:
         distances = np.loadtxt(distances_file)
         return self(coordinates, distances)
 
-    # @classmethod
-    # def from_random(self, num_places=50, max_distance=100):
-    #     coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
-    #     return coordinates
+    @classmethod
+    def from_random(self, num_places=50, max_distance=100):
+        coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
+        return coordinates
 
 @dataclass(eq=True,frozen=True)
 class Place:
