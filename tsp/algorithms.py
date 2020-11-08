@@ -87,6 +87,9 @@ class Ant:
         while not self.tour_finished:
             self.move()
 
+    def __str__(self):
+        return f"{self.__class__} [Current: {self.current}, Tour: {self.tour}]"
+
 
 class AntColony(Algorithm):
     """
