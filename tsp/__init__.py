@@ -24,7 +24,7 @@ class TSP:
         return total_cost
 
     def missing(self, visited_places):
-        return visited_places - set(self.places)
+        return set(self.places) - visited_places
 
     @classmethod
     def from_files(self,coordinates_file, distances_file):
