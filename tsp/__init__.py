@@ -10,7 +10,7 @@ class TSP:
     """
     Describes a TSP
     """
-    def __init__(self, coordinates):
+    def __init__(self, coordinates,distances):
         self.places = [Place(id, v[0], v[1]) for id, v in enumerate(coordinates)]
         self.distances = distance.cdist(coordinates, coordinates, 'euclidean')
 
@@ -21,18 +21,21 @@ class TSP:
         total_cost = 0.0
         for current, next in tour:
             total_cost += self.cost(current, next)
-
         return total_cost
 
-    @staticmethod
-    def from_file(fileobj):
-        coordinates = np.loadtxt(fileobj)
-        return TSP(coordinates)
+    def missing(self, visited_places):
+        return visited_places - set(self.places)
 
-    @staticmethod
-    def from_random(num_places=50, max_distance=100):
-        coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
-        return TSP(coordinates)
+    @classmethod
+    def from_files(self,coordinates_file, distances_file):
+        coordinates = np.loadtxt(coordinates_file)
+        distances = np.loadtxt(distances_file)
+        return self(coordinates, distances)
+
+    # @classmethod
+    # def from_random(self, num_places=50, max_distance=100):
+    #     coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
+    #     return coordinates
 
 @dataclass(eq=True,frozen=True)
 class Place:
@@ -63,12 +66,13 @@ class Tour:
 
         return closed
 
+    @property
+    def visited_places(self):
+        return set (self._path)
+
     def close(self):
         if len(self._path) > 1:
             self._path.append(self._path[0])
-
-    def missing(self, places):
-        return set(places) -  set(self._path)
 
     def append(self, place):
         self._path.append(place)
@@ -88,7 +92,7 @@ class Tour:
     def __str__(self):
         return f"Tour: [{'->'.join([place.id for place in self._path])}]"
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 #from .cli import cli
