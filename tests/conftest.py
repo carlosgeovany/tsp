@@ -60,3 +60,12 @@ def places():
         'C': Place('C', 0, 1),
         'D': Place('D', 1, 1)
     }
+
+@pytest.fixture
+def t1():
+    t1 = Tour()
+
+    t1.append(Place(0, 0, 0))
+    t1.append(Place(1, 1, 0))
+    t1.append(Place(2, 0, 1))
+    return t1
