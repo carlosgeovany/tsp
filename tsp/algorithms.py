@@ -2,9 +2,7 @@ from copy import copy
 from abc import ABC, abstractmethod
 
 import numpy as np
-## avoid 1/0 warning
-np.seterr(all='raise')
-
+import time
 from tsp import Tour
 
 
@@ -23,7 +21,9 @@ class GreedyTSP(Algorithm):
         """
         Selecciona los siguientes nodos a visitar de manera greedy
         """
-
+        
+        start = time.time()
+        
         if self.initial is None:
             self.initial = np.random.choice(tsp.places)
 
@@ -43,8 +43,9 @@ class GreedyTSP(Algorithm):
                 tour.close()
 
         cost = tsp.total_cost(tour)
-
-        return {'cost': cost, 'tour': tour}
+        
+        elapsed_time = round(time.time() - start, 3)
+        return {'cost': cost, 'tour': tour, 'time': elapsed_time}
 
     def __str__(self):
         return f"{self.__class__} [initial: {self.initial}]"
@@ -90,7 +91,7 @@ class Ant:
             self.move()
 
     def __str__(self):
-        return f"{self.__class__} [Current: {self.current}, Tour: {self.tour}]"
+        return f"{self.__class__} [Current: {self.current}, Tour: [{self.tour}]]"
 
 
 class AntColony(Algorithm):
@@ -103,7 +104,7 @@ class AntColony(Algorithm):
         self.beta = hyperparams.get('beta', 1)
         self.rho = hyperparams.get('rho', 0.5)
         self.Q = hyperparams.get('Q', 100)
-        self.best = None
+        self.best = Tour()
         self.steps = 0
         self.max_steps = hyperparams.get('max_steps', 100)
 
@@ -113,7 +114,8 @@ class AntColony(Algorithm):
         self.pheromones = np.full([len(self.tsp.places), len(
             self.tsp.places)], fill_value=self.initial_pheromone)
         self.eta = (1.0/self.tsp.distances)
-
+        #for ant in self.ants: ant.travel()
+        
     def reset(self):
         self.init()
 
@@ -151,10 +153,11 @@ class AntColony(Algorithm):
     def run(self, tsp):
         self.tsp = tsp
         self.init()
+        start = time.time()
         while not self.done:
             self.step()
-            
-        return {'cost': self.steps, 'best': self.best}
+        elapsed_time = round(time.time() - start, 3)
+        return {'cost': self.steps, 'tour': self.best, 'time': elapsed_time}
 
     def __str__(self):
         return f"{self.__class__} [alpha: {self.alpha}, beta: {self.beta}, rho: {self.rho}, Q: {self.Q}, max_steps: {self.max_steps}]"
