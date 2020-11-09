@@ -1,14 +1,17 @@
 """
 """
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.spatial import distance
 from dataclasses import dataclass
 from typing import List
 from more_itertools import pairwise
 
+
+
 class TSP:
     """
-    Describes a TSP
+    Describe a TSP
     """
     def __init__(self, coordinates,distances):
         self.places = [Place(id, v[0], v[1]) for id, v in enumerate(coordinates)]
@@ -36,6 +39,13 @@ class TSP:
     def from_random(self, num_places=50, max_distance=100):
         coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
         return coordinates
+    
+    def plot_problem(self, filename):
+        for place in self.places:
+            plt.plot(place.x, place.y, 'bo')
+        plt.title("Places to visit in TSP")
+        plt.savefig(filename)
+
 
 @dataclass(eq=True,frozen=True)
 class Place:
@@ -95,6 +105,7 @@ class Tour:
     def __str__(self):
         return f"Tour: [{'->'.join([place.id for place in self._path])}]"
 
+    
 __version__ = '0.1.1'
 
 

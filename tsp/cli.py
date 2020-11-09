@@ -38,7 +38,8 @@ def solve(ctx):
 
 
 @main.command()
-@click.option('--filename', help='Full path to the png file')
+@click.pass_context
+@click.option('--filename', type=click.STRING, help='Full path to the png file')
 def problem_png(ctx, filename):
     ctx.obj['tsp'].plot_problem(filename)
 

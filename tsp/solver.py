@@ -1,7 +1,6 @@
 """
 """
 
-
 class Solver:
     """"""
 
@@ -14,5 +13,6 @@ class Solver:
         for algorithm in self.algorithms:
             print(f"Solving TSP problem with {algorithm}")
             self.solutions[str(algorithm)] = algorithm.run(tsp)
-
+        
         return self.solutions
+        
