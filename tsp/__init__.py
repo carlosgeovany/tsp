@@ -13,7 +13,7 @@ class TSP:
     """
     Describe a TSP
     """
-    def __init__(self, coordinates,distances):
+    def __init__(self, coordinates,*distances):
         self.places = [Place(id, v[0], v[1]) for id, v in enumerate(coordinates)]
         self.distances = distance.cdist(coordinates, coordinates, 'euclidean')
 
@@ -38,7 +38,7 @@ class TSP:
     @classmethod
     def from_random(self, num_places=50, max_distance=100):
         coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
-        return coordinates
+        return self(coordinates)
     
     def plot_problem(self, filename):
         for place in self.places:
