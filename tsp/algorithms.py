@@ -1,4 +1,4 @@
-import copy
+from copy import copy
 from abc import ABC, abstractmethod
 
 import numpy as np
@@ -136,7 +136,7 @@ class AntColony(Algorithm):
 
     def update_best(self):
         for ant in self.ants:
-            if len(ant.tour) < len(self.best):
+            if len(ant.tour) > len(self.best):
                 self.best = copy(ant.tour)
 
     def step(self):
