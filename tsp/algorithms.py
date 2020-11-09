@@ -2,6 +2,8 @@ from copy import copy
 from abc import ABC, abstractmethod
 
 import numpy as np
+## avoid 1/0 warning
+np.seterr(all='raise')
 
 from tsp import Tour
 
@@ -101,7 +103,7 @@ class AntColony(Algorithm):
         self.beta = hyperparams.get('beta', 1)
         self.rho = hyperparams.get('rho', 0.5)
         self.Q = hyperparams.get('Q', 100)
-        self.best = Tour()
+        self.best = None
         self.steps = 0
         self.max_steps = hyperparams.get('max_steps', 100)
 
@@ -110,7 +112,7 @@ class AntColony(Algorithm):
         self.initial_pheromone = 1.0/len(self.tsp.places)
         self.pheromones = np.full([len(self.tsp.places), len(
             self.tsp.places)], fill_value=self.initial_pheromone)
-        self.eta = (1/self.tsp.distances)
+        self.eta = (1.0/self.tsp.distances)
 
     def reset(self):
         self.init()
@@ -136,7 +138,7 @@ class AntColony(Algorithm):
 
     def update_best(self):
         for ant in self.ants:
-            if len(ant.tour) > len(self.best):
+            if len(ant.tour) < len(self.best):
                 self.best = copy(ant.tour)
 
     def step(self):

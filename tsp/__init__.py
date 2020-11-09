@@ -39,13 +39,16 @@ class TSP:
 
 @dataclass(eq=True,frozen=True)
 class Place:
-    """A place to be visited"""
+    """
+    A place to be visited
+    """
     id: int
     x: float
     y: float
 
 class Tour:
     """
+    Describes places visited
     """
     def __init__(self):
         self._path = []
