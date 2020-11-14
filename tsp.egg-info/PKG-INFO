@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: tsp
+Version: 0.1.1
+Summary: Solves the TSP problem using a bunch of algorithms
+Home-page: https://gitlab.com/nanounanue/tsp
+Author: Adolfo De Unánue
+Author-email: a@unanue.mx
+License: UNKNOWN
+Project-URL: Issue Tracker, https://gitlab.com/nanounanue/tsp/issues
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.7
+Provides-Extra: tests

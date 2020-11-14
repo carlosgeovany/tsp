@@ -6,9 +6,9 @@ def process_grid(grids):
     algorithms = []
     for grid in grids:
         print(grid)
-        classpath = grid["algorithm"]
-        if "hyperparameters" in grid:
-            hp_grid = grid["hyperparameters"]
+        classpath = grid['algorithm']
+        if 'hyperparameters' in grid:
+            hp_grid = grid['hyperparameters']
             for hyperparameters in flatten_algorithm_grid(hp_grid):
                 algorithms.append(load_algorithm(classpath, **hyperparameters))
         else:

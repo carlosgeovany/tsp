@@ -1,0 +1,9 @@
+numpy
+click
+dynaconf
+more-itertools
+scipy
+
+[tests]
+pytest
+flake8

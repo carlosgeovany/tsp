@@ -1,0 +1,3 @@
+[console_scripts]
+calculate_tour = tsp.cli:start
+

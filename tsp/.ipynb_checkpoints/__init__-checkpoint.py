@@ -8,16 +8,14 @@ from typing import List
 from more_itertools import pairwise
 
 
+
 class TSP:
     """
     Describe a TSP
     """
-
-    def __init__(self, coordinates, *distances):
-        self.places = [
-            Place(id, v[0], v[1]) for id, v in enumerate(coordinates)
-        ]
-        self.distances = distance.cdist(coordinates, coordinates, "euclidean")
+    def __init__(self, coordinates,*distances):
+        self.places = [Place(id, v[0], v[1]) for id, v in enumerate(coordinates)]
+        self.distances = distance.cdist(coordinates, coordinates, 'euclidean')
 
     def cost(self, place, another_place):
         return self.distances[place.id][another_place.id]
@@ -32,41 +30,40 @@ class TSP:
         return set(self.places).difference(visited_places)
 
     @classmethod
-    def from_files(self, coordinates_file, distances_file):
+    def from_files(self,coordinates_file, distances_file):
         coordinates = np.loadtxt(coordinates_file)
         distances = np.loadtxt(distances_file)
         return self(coordinates, distances)
 
     @classmethod
     def from_random(self, num_places=50, max_distance=100):
-        coordinates = np.random.randint(
-            low=0, high=max_distance, size=(num_places, 2)
-        )
+        coordinates = np.random.randint(low=0, high=max_distance, size=(num_places,2))
         return self(coordinates)
-
+    
     def plot_problem(self, filename):
         for place in self.places:
-            plt.plot(place.x, place.y, "bo")
+            plt.plot(place.x, place.y, 'bo')
         plt.title("Places to visit in TSP")
         plt.savefig(filename)
+    
+    
+    
 
 
-@dataclass(eq=True, frozen=True)
+
+@dataclass(eq=True,frozen=True)
 class Place:
     """
     A place to be visited
     """
-
     id: int
     x: float
     y: float
-
 
 class Tour:
     """
     Describes places visited
     """
-
     def __init__(self):
         self._path = []
 
@@ -88,7 +85,7 @@ class Tour:
 
     @property
     def visited_places(self):
-        return set(self._path)
+        return set (self._path)
 
     def close(self):
         if len(self._path) > 1:
@@ -100,14 +97,17 @@ class Tour:
     def __len__(self):
         return len(self._path)
 
+
     def __iter__(self):
-        return ((current, next) for (current, next) in pairwise(self._path))
+        return ((current, next) for (current,next) in pairwise(self._path))
+
 
     def __repr__(self):
         return f"[{'->'.join([str(place) for place in self._path])}]"
 
+
     def __str__(self):
         return f"[{'->'.join([place.id for place in self._path])}]"
 
-
-__version__ = "0.1.2"
+    
+__version__ = '0.1.2'

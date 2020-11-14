@@ -12,21 +12,9 @@ from .utils import process_grid
 
 
 @click.group()
-@click.option(
-    "--coordinates_file",
-    type=click.File("r"),
-    help="Path to the coordinates file",
-)
-@click.option(
-    "--distances_file",
-    type=click.File("r"),
-    help="Path to the distances/cost file",
-)
-@click.option(
-    "--random",
-    is_flag=True,
-    help="Generates a random TSP problem. This flag has precedence over the others.",
-)
+@click.option('--coordinates_file', type=click.File('r'), help="Path to the coordinates file")
+@click.option('--distances_file', type=click.File('r'), help="Path to the distances/cost file")
+@click.option('--random', is_flag=True, help="Generates a random TSP problem. This flag has precedence over the others.")
 @click.pass_context
 def main(ctx, coordinates_file, distances_file, random):
     if random:
@@ -34,9 +22,9 @@ def main(ctx, coordinates_file, distances_file, random):
     elif coordinates_file or distances_file:
         tsp = TSP.from_files(coordinates_file, distances_file)
     else:
-        warnings.warn("No problem to solve. Is this what you want?")
+        warnings.warn('No problem to solve. Is this what you want?')
         return
-    ctx.obj["tsp"] = tsp
+    ctx.obj['tsp'] = tsp
 
 
 @main.command()
@@ -45,17 +33,15 @@ def solve(ctx):
     grids = settings.algorithms
     algorithms = process_grid(grids)
     solver = Solver(algorithms)
-    solution = solver.solve(ctx.obj["tsp"])
+    solution = solver.solve(ctx.obj['tsp'])
     print(solution)
 
 
 @main.command()
 @click.pass_context
-@click.option(
-    "--filename", type=click.STRING, help="Full path to the png file"
-)
+@click.option('--filename', type=click.STRING, help='Full path to the png file')
 def problem_png(ctx, filename):
-    ctx.obj["tsp"].plot_problem(filename)
+    ctx.obj['tsp'].plot_problem(filename)
     print(f"problem plot saved at {filename}")
 
 
