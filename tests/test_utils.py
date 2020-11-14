@@ -9,16 +9,19 @@ def test_process_grid(grids):
 
 
 def test_load_algorithm(grids):
-    grid = grids[1]
-    classpath = grid['algorithm']
-    algorithms = []
-    hp_grid = grid['hyperparameters']
-    for hyperparameters in flatten_algorithm_grid(hp_grid):
-        algorithms.append(load_algorithm(classpath, **hyperparameters))
-    assert (algorithms[0].alpha == 0.5 and
-            algorithms[10].beta == 5.0 and
-            algorithms[20].rho == 0.5 and
-            algorithms[-1].Q == 100)
+    if len(grids) > 1:
+        grid = grids[1]
+        classpath = grid['algorithm']
+        algorithms = []
+        hp_grid = grid['hyperparameters']
+        for hyperparameters in flatten_algorithm_grid(hp_grid):
+            algorithms.append(load_algorithm(classpath, **hyperparameters))
+        assert (algorithms[0].alpha == 0.5 and
+                algorithms[10].beta == 5.0 and
+                algorithms[20].rho == 0.5 and
+                algorithms[-1].Q == 100)
+    else:
+        assert 
 
 
 def test_flatten_algorithm_grid(grids):

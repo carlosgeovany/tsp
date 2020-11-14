@@ -34,7 +34,7 @@ def solve(ctx):
     algorithms = process_grid(grids)
     solver = Solver(algorithms)
     solution = solver.solve(ctx.obj['tsp'])
-    #print(solution)
+    print(solution)
 
 
 @main.command()

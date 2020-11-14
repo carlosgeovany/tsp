@@ -103,14 +103,11 @@ class Tour:
 
 
     def __repr__(self):
-        return f"Tour: [{'->'.join([str(place) for place in self._path])}]"
+        return f"[{'->'.join([str(place) for place in self._path])}]"
 
 
     def __str__(self):
-        return f"Tour: [{'->'.join([place.id for place in self._path])}]"
+        return f"[{'->'.join([place.id for place in self._path])}]"
 
     
-__version__ = '0.1.1'
-
-
-#from .cli import cli
+__version__ = '0.1.2'
