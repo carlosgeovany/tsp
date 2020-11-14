@@ -33,8 +33,8 @@ def solve(ctx):
     grids = settings.algorithms
     algorithms = process_grid(grids)
     solver = Solver(algorithms)
-    solutions = solver.solve(ctx.obj['tsp'])
-    print(solutions)
+    solution = solver.solve(ctx.obj['tsp'])
+    #print(solution)
 
 
 @main.command()
@@ -42,6 +42,7 @@ def solve(ctx):
 @click.option('--filename', type=click.STRING, help='Full path to the png file')
 def problem_png(ctx, filename):
     ctx.obj['tsp'].plot_problem(filename)
+    print(f"problem plot saved at {filename}")
 
 
 def start():

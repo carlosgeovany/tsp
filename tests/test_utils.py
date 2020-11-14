@@ -19,7 +19,6 @@ def test_load_algorithm(grids):
             algorithms[10].beta == 5.0 and
             algorithms[20].rho == 0.5 and
             algorithms[-1].Q == 100)
-    pass
 
 
 def test_flatten_algorithm_grid(grids):

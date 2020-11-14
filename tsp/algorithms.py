@@ -45,6 +45,7 @@ class GreedyTSP(Algorithm):
         cost = tsp.total_cost(tour)
         
         elapsed_time = round(time.time() - start, 3)
+        
         return {'cost': cost, 'tour': tour, 'time': elapsed_time}
 
     def __str__(self):
@@ -74,7 +75,6 @@ class Ant:
 
     def move(self):
         odor = 0.0
-
         for next in self.not_visited:
             odor += self.smell(next)
 
@@ -85,6 +85,7 @@ class Ant:
             if threshold <= 0:
                 self.current = next
                 self.tour.append(next)
+                break
 
     def travel(self):
         while not self.tour_finished:
@@ -104,7 +105,7 @@ class AntColony(Algorithm):
         self.beta = hyperparams.get('beta', 1)
         self.rho = hyperparams.get('rho', 0.5)
         self.Q = hyperparams.get('Q', 100)
-        self.best = Tour()
+        self.best = None
         self.steps = 0
         self.max_steps = hyperparams.get('max_steps', 100)
 
@@ -114,7 +115,8 @@ class AntColony(Algorithm):
         self.pheromones = np.full([len(self.tsp.places), len(
             self.tsp.places)], fill_value=self.initial_pheromone)
         self.eta = (1.0/self.tsp.distances)
-        #for ant in self.ants: ant.travel()
+        self.best = GreedyTSP().run(self.tsp)['tour']
+        
         
     def reset(self):
         self.init()
@@ -146,8 +148,8 @@ class AntColony(Algorithm):
     def step(self):
         for ant in self.ants:
             ant.move()
-        self.update_best()
         self.update_pheromones()
+        self.update_best()
         self.steps += 1
 
     def run(self, tsp):
@@ -157,7 +159,10 @@ class AntColony(Algorithm):
         while not self.done:
             self.step()
         elapsed_time = round(time.time() - start, 3)
-        return {'cost': self.steps, 'tour': self.best, 'time': elapsed_time}
+        
+        cost = tsp.total_cost(self.best)
+        
+        return {'cost': cost, 'tour': self.best, 'time': elapsed_time}
 
     def __str__(self):
         return f"{self.__class__} [alpha: {self.alpha}, beta: {self.beta}, rho: {self.rho}, Q: {self.Q}, max_steps: {self.max_steps}]"

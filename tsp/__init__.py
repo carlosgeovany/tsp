@@ -45,6 +45,10 @@ class TSP:
             plt.plot(place.x, place.y, 'bo')
         plt.title("Places to visit in TSP")
         plt.savefig(filename)
+    
+    
+    
+
 
 
 @dataclass(eq=True,frozen=True)
