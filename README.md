@@ -25,4 +25,17 @@ el sufijo `_d` la matriz de distancia.
 
 La tabla completa con las soluciones y los resultados se encuentran en [solutions](solutions).
 
-A continuación se muestran algunos resultados de los problemas y sus soluciones
+A continuación se muestran algunos resultados de los problemas y sus soluciones:
+
+#### Random
+
+Desde la línea de comandos se ejecuta: 
+
+`calculate_tour --random --filename "solutions/random.png" solve`
+
+El grafo del problema resuelto es el siguiente:
+
+![random](https://github.com/carlosgeovany/tsp/blob/master/solutions/random.png)
+
+La solución completa es: 
+

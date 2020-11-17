@@ -5,7 +5,6 @@ Returns best solution for TSP problem and plot solution
 from copy import copy
 import matplotlib.pyplot as plt
 
-
 class Solver:
     """"""
 
@@ -57,5 +56,9 @@ class Solver:
 
         best = min(self.solutions.items(), key=lambda x: x[1]["cost"])
         self.plot_solution(tsp, best, filename)
+
+        filename = filename.replace("png", "txt")
+        with open(filename, "w") as txt:
+            txt.write(str(best))
 
         return best
