@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: tsp
-Version: 0.1.1
+Version: 0.1.2
 Summary: Solves the TSP problem using a bunch of algorithms
 Home-page: https://gitlab.com/nanounanue/tsp
 Author: Adolfo De Unánue

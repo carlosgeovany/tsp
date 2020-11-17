@@ -112,7 +112,6 @@ class AntColony(Algorithm):
         self.beta = hyperparams.get("beta", 1)
         self.rho = hyperparams.get("rho", 0.5)
         self.Q = hyperparams.get("Q", 100)
-        self.best_len = float("inf")
         self.best = None
         self.steps = 0
         self.max_steps = hyperparams.get("max_steps", 100)
@@ -124,7 +123,9 @@ class AntColony(Algorithm):
             [len(self.tsp.places), len(self.tsp.places)],
             fill_value=self.initial_pheromone,
         )
-        self.eta = 1.0 / self.tsp.distances
+        with np.errstate(divide='ignore'):
+            self.eta = 1.0 / self.tsp.distances
+        self.best = GreedyTSP().run(self.tsp)['tour']
 
     def reset(self):
         self.init()
@@ -152,15 +153,14 @@ class AntColony(Algorithm):
 
     def update_best(self):
         for ant in self.ants:
-            if len(ant.tour) < self.best_len:
-                self.best_len = len(ant.tour)
+            if len(ant.tour) < len(self.best):
                 self.best = copy(ant.tour)
 
     def step(self):
         for ant in self.ants:
             ant.move()
-        self.update_pheromones()
         self.update_best()
+        self.update_pheromones()
         self.steps += 1
 
     def run(self, tsp):
@@ -169,6 +169,8 @@ class AntColony(Algorithm):
         start = time.time()
         while not self.done:
             self.step()
+            if self.steps != self.max_steps:
+                self.reset()
 
         cost = tsp.total_cost(self.best)
         elapsed_time = round(time.time() - start, 3)

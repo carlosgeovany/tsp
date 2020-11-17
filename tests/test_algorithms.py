@@ -19,4 +19,4 @@ def test_aoc(tsp_obj):
 
     solution = colony.run(tsp_obj)
 
-    assert solution['cost'] == 19
+    assert int(solution['cost']) == 8
