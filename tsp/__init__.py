@@ -38,7 +38,7 @@ class TSP:
         return self(coordinates, distances)
 
     @classmethod
-    def from_random(self, num_places=50, max_distance=100):
+    def from_random(self, num_places=10, max_distance=100):
         coordinates = np.random.randint(
             low=0, high=max_distance, size=(num_places, 2)
         )

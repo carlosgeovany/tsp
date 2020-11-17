@@ -13,18 +13,11 @@ class Solver:
         self.algorithms = algorithms
         self.solutions = {}
 
-    def solve(self, tsp):
-        print(
-            f"Will use {len(self.algorithms)} algorithms to solve this problem."
-        )
-        for algorithm in self.algorithms:
-            print(f"Solving TSP problem with {algorithm}")
-            self.solutions[str(algorithm)] = algorithm.run(tsp)
-
-        best = min(self.solutions.items(), key=lambda x: x[1]["cost"])
-
-        ##Plotting the best solution and save to data
-
+    
+    def plot_solution(self, tsp, best, filename):
+        """
+        PLot and save the best solution
+        """
         best_tour = copy(best[1]["tour"])
 
         for place in tsp.places:
@@ -38,16 +31,31 @@ class Solver:
                 next.y - current.y,
                 color="b",
                 length_includes_head=True,
+                head_width = 1.5
             )
 
         plt.annotate(
             "initial",
             xy=(best_tour.initial.x, best_tour.initial.y),
-            xytext=(best_tour.initial.x, best_tour.initial.y),
+            xytext=(best_tour.initial.x, best_tour.initial.y)
         )
 
         plt.title("TSP solution cost: %.2f" % best[1]["cost"])
+        plt.savefig(filename)    
 
-        plt.savefig("data/TSP_solution.png")
+
+    def solve(self, tsp, filename):
+        """
+        Run Greedy and AOC algorithms to find the best solution
+        """
+        print(
+            f"Will use {len(self.algorithms)} algorithms to solve this problem."
+        )
+        for algorithm in self.algorithms:
+            print(f"Solving TSP problem with {algorithm}")
+            self.solutions[str(algorithm)] = algorithm.run(tsp)
+
+        best = min(self.solutions.items(), key=lambda x: x[1]["cost"])
+        self.plot_solution(tsp, best, filename)
 
         return best
