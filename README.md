@@ -37,5 +37,20 @@ El grafo del problema resuelto es el siguiente:
 
 ![random](https://github.com/carlosgeovany/tsp/blob/master/solutions/random.png)
 
-La solución completa es: 
+La solución completa al problema [random](https://github.com/carlosgeovany/tsp/blob/master/solutions/random.txt)
+es la siguiente:
 
+| algoritmo | hiperparámetros | costo | tour                      | tiempo |
+|:---------:|:---------------:|:-----:|:-------------------------:|:------:|
+| AntColony | alpha: 0.5 	  | 325.59| Place(id=3, x=51, y=63)-> | 0.197  |
+|			| beta: 1.0		  |			Place(id=1, x=73, y=69)-> |        |
+|			| rho: 0.8		  |			Place(id=0, x=59, y=90)-> |		   |	
+|			| Q: 10			  |			Place(id=9, x=99, y=88)-> |        |
+|			| max_steps: 100  |			Place(id=5, x=77, y=41)-> |        |
+|			|							Place(id=4, x=73, y=34)-> |        |
+|			|							Place(id=2, x=52, y=39)-> |		   |
+|			|							Place(id=7, x=49, y=36)-> |		   |
+|			|							Place(id=6, x=32, y=17)-> |		   |
+|			|							Place(id=8, x=12, y=92)-> |  	   |
+|			|							Place(id=3, x=51, y=63)	  |		   |
+ 
