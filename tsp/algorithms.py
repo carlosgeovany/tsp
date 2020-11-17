@@ -123,8 +123,10 @@ class AntColony(Algorithm):
             [len(self.tsp.places), len(self.tsp.places)],
             fill_value=self.initial_pheromone,
         )
+        ## avoid divided by zero warning
         with np.errstate(divide='ignore'):
             self.eta = 1.0 / self.tsp.distances
+        ## initialize our best tour with the greedy solution
         self.best = GreedyTSP().run(self.tsp)['tour']
 
     def reset(self):
@@ -174,6 +176,7 @@ class AntColony(Algorithm):
 
         cost = tsp.total_cost(self.best)
         elapsed_time = round(time.time() - start, 3)
+        
         return {"cost": cost, "tour": self.best, "time": elapsed_time}
 
     def __str__(self):

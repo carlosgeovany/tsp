@@ -19,3 +19,8 @@ Pero el formato fué modificado para este proyecto.
 
 Los archivos sin sufijo `_d` contienen las coordenadas. Los que tienen
 el sufijo `_d` la matriz de distancia.
+
+
+A continuación se muestran algunos resultados de los problemas y sus soluciones. 
+La tabla completa con las soluciones y los resultados se encuentran en [solutions](solutions).
+
