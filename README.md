@@ -27,37 +27,44 @@ From command line:
 
 `calculate_tour --random --filename [full path with file extension .png, jpg] solve`
 
-It will save a .txt file with the full problem solution with:
 
-| algorithm | hyperparameters | cost | tour | time |
+### To plot the problem
 
-And the solution plot as a image like:
-
-![random](https://github.com/carlosgeovany/tsp/blob/master/solutions/random.png)
+`calculate_tour --coordinates_file [file full path] problem-png --filename [full path with file extension .png, jpg]`
 
 
-### For a problem
+### For a problem with coordinates only
 
+`calculate_tour --coordinates_file [file full path] --filename [full path with file extension .png, jpg] solve`
+
+
+### For a problem with coordinates and distances matrix
+
+`calculate_tour --coordinates_file [file full path] --distances_file [file full path]--filename [full path with file extension .png, jpg] solve`
 
 
 ## Solutions
 
-La tabla completa con las soluciones y los resultados se encuentran en [solutions](solutions).
+Solution will be saved as a .txt file with the full problem solution with:
+
+| algorithm | hyperparameters | cost | tour | time |
+
+and plot as image
+
+#### Random problem
+![random](https://github.com/carlosgeovany/tsp/blob/master/solutions/random_solution.png)
 
 
+#### att48 problem
+![att48problem](https://github.com/carlosgeovany/tsp/blob/master/solutions/att48_problem.png)
 
-| algoritmo | hiperparámetros | costo | tour                      | tiempo |
-|:---------:|:---------------:|:-----:|:-------------------------:|:------:|
-| AntColony | alpha: 0.5 	  | 325.59| Place(id=3, x=51, y=63)-> | 0.197  |
-|			| beta: 1.0		  |		  |	Place(id=1, x=73, y=69)-> |        |
-|			| rho: 0.8		  |		  |	Place(id=0, x=59, y=90)-> |		   |	
-|			| Q: 10			  |		  |	Place(id=9, x=99, y=88)-> |        |
-|			| max_steps: 100  |		  |	Place(id=5, x=77, y=41)-> |        |
-|			|				  |		  |	Place(id=4, x=73, y=34)-> |        |
-|			|				  |		  |	Place(id=2, x=52, y=39)-> |		   |
-|			|				  |		  |	Place(id=7, x=49, y=36)-> |		   |
-|			|				  |		  |	Place(id=6, x=32, y=17)-> |		   |
-|			|				  |		  |	Place(id=8, x=12, y=92)-> |  	   |
-|			|				  |		  |	Place(id=3, x=51, y=63)	  |		   |
- 
-#### 
+![att48solution](https://github.com/carlosgeovany/tsp/blob/master/solutions/att48_solution.png)
+
+
+#### qatar problem
+![qatarproblem](https://github.com/carlosgeovany/tsp/blob/master/solutions/qatar_problem.png)
+
+![qatarsolution](https://github.com/carlosgeovany/tsp/blob/master/solutions/qatar_solution.png)
+
+
+Full solutions for this project can be found at [solutions](solutions).
