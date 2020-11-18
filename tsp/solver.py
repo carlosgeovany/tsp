@@ -1,13 +1,11 @@
 """
 Run tsp problem with TSPGreedy and AOC algorithms
-Returns best solution for TSP problem and plot solution
 """
 from copy import copy
 import matplotlib.pyplot as plt
 import re
 
 class Solver:
-    """"""
 
     def __init__(self, algorithms):
         self.algorithms = algorithms

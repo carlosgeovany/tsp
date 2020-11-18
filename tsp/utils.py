@@ -1,8 +1,15 @@
+"""
+Auxiliar methods to setup Greedy and AOC algorithms parameters
+"""
+
 import importlib
 from itertools import product
 
 
 def process_grid(grids):
+    """
+    Create grid with Greedy and AOC algorithms hyperparameters
+    """
     algorithms = []
     for grid in grids:
         print(grid)
@@ -18,6 +25,9 @@ def process_grid(grids):
 
 
 def load_algorithm(classpath, **hyperparameters):
+    """
+    Create algorithm instance
+    """
     module_name, class_name = classpath.rsplit(".", 1)
     module = importlib.import_module(module_name)
     cls = getattr(module, class_name)
@@ -26,6 +36,9 @@ def load_algorithm(classpath, **hyperparameters):
 
 
 def flatten_algorithm_grid(algorithm_grid):
+    """
+    Create algorithms hyperparameters
+    """
     items = sorted(algorithm_grid.items())
     if not items:
         yield {}

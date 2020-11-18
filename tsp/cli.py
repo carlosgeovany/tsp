@@ -1,4 +1,6 @@
-""" Una interfaz de línea de comandos para resolver el problema TSP"""
+""" 
+Command line interface to solve TSP problem
+"""
 
 import warnings
 

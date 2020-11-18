@@ -1,3 +1,6 @@
+"""
+Implements Algorithms to solve TSP
+"""
 from copy import copy
 from abc import ABC, abstractmethod
 
@@ -18,7 +21,7 @@ class GreedyTSP(Algorithm):
 
     def run(self, tsp):
         """
-        Selecciona los siguientes nodos a visitar de manera greedy
+        Select next nodes to visit greedily
         """
 
         start = time.time()
@@ -55,7 +58,7 @@ class GreedyTSP(Algorithm):
 
 class Ant:
     """
-    Representa a un agente "hormiga" del algoritmo ACO
+    "Ant" agent in the AOC algorithm
     """
 
     def __init__(self, colony, initial_state):
@@ -104,7 +107,7 @@ class Ant:
 
 class AntColony(Algorithm):
     """
-    Implementa el algoritmo ACO básico
+    Basic ACO algorithm implementation
     """
 
     def __init__(self, **hyperparams):
