@@ -4,6 +4,7 @@ Returns best solution for TSP problem and plot solution
 """
 from copy import copy
 import matplotlib.pyplot as plt
+import re
 
 class Solver:
     """"""
@@ -18,9 +19,11 @@ class Solver:
         PLot and save the best solution
         """
         best_tour = copy(best[1]["tour"])
+        plt.rcParams["figure.figsize"] = (10,5)
 
         for place in tsp.places:
-            plt.plot(place.x, place.y, "bo")
+            plt.plot(place.x, place.y, "bo", ms=1, linewidth=2)
+        
 
         for current, next in best_tour:
             plt.arrow(
@@ -30,7 +33,6 @@ class Solver:
                 next.y - current.y,
                 color="b",
                 length_includes_head=True,
-                head_width = 1.5
             )
 
         plt.annotate(
@@ -39,7 +41,9 @@ class Solver:
             xytext=(best_tour.initial.x, best_tour.initial.y)
         )
 
-        plt.title("TSP solution cost: %.2f" % best[1]["cost"])
+        title = re.search(r'\/(.*?)\.',filename).group().replace("/","").replace(".","")
+        plt.title(f"{title} solution \nDistance: %.2f" % best[1]["cost"])
+        plt.axis('off')
         plt.savefig(filename)    
 
 

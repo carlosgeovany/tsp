@@ -126,7 +126,7 @@ class AntColony(Algorithm):
         ## avoid divided by zero warning
         with np.errstate(divide='ignore'):
             self.eta = 1.0 / self.tsp.distances
-        ## initialize our best tour with the greedy solution
+        ## initialize our best tour with the greedy solution as baseline solution
         self.best = GreedyTSP().run(self.tsp)['tour']
 
     def reset(self):

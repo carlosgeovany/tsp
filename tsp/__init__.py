@@ -6,6 +6,7 @@ from scipy.spatial import distance
 from dataclasses import dataclass
 from typing import List
 from more_itertools import pairwise
+import re
 
 
 class TSP:
@@ -34,8 +35,11 @@ class TSP:
     @classmethod
     def from_files(self, coordinates_file, distances_file):
         coordinates = np.loadtxt(coordinates_file)
-        distances = np.loadtxt(distances_file)
-        return self(coordinates, distances)
+        if not distances_file:
+            return self(coordinates)
+        else:
+            distances = np.loadtxt(distances_file)
+            return self(coordinates, distances)
 
     @classmethod
     def from_random(self, num_places=10, max_distance=100):
@@ -45,9 +49,12 @@ class TSP:
         return self(coordinates)
 
     def plot_problem(self, filename):
+        plt.rcParams["figure.figsize"] = (10,5)
         for place in self.places:
-            plt.plot(place.x, place.y, "bo")
-        plt.title("Places to visit in TSP")
+            plt.plot(place.x, place.y, "bo", ms=1)
+        title = re.search(r'\/(.*?)\.',filename).group().replace("/","").replace(".","")
+        plt.title(f"{title} problem")
+        plt.axis('off')
         plt.savefig(filename)
 
 

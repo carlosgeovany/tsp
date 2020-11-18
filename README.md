@@ -54,3 +54,4 @@ es la siguiente:
 |			|				  |		  |	Place(id=8, x=12, y=92)-> |  	   |
 |			|				  |		  |	Place(id=3, x=51, y=63)	  |		   |
  
+#### 
