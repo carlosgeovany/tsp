@@ -9,7 +9,6 @@ config/tsp.toml
 data/argentina.tsp
 data/att48.tsp
 data/att48_d.tsp
-data/dantzig_d.tsp
 data/nicaragua.tsp
 data/p01.tsp
 data/p01_d.tsp
